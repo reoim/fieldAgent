@@ -33,5 +33,27 @@
       <ion-content>
       </ion-content>
     </ion-pane>
+
+    <ion-view view-title="Login" name="login-view" ng-controller="LoginController">
+        <ion-content class="padding">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" placeholder="Username" ng-model="user.username">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="user.password">
+                </label>
+            </div>
+            <button ng-click="login()" class="button button-block button-stable">Login</button>
+            <button ng-click="register()" class="button button-block button-dark">Register</button>
+            <pre>{{user | json}}</pre>
+            <pre ng-model="data">{{data}}</pre>
+            <pre>{{result}}</pre>
+
+        </ion-content>
+
+
+
+    </ion-view>
   </body>
 </html>

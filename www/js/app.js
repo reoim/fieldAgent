@@ -19,7 +19,7 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers'])
 })
 
 
-.config(function($stateProvider, $urlRouterProvider) {
+/*.config(function($stateProvider, $urlRouterProvider) {
 
 
     $stateProvider
@@ -34,5 +34,5 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers'])
 
 
     $urlRouterProvider.otherwise('/login');
-})
+})*/
 

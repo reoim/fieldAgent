@@ -6,12 +6,52 @@ angular.module('fieldAgent.controllers', [])
 
 .controller("LoginController", function($scope, $http) {
 
-        $http.get("htttp://www.ourdb.com/db/user.php")
+
+        $scope.user = {};
+        $scope.url = 'http://fieldagent.js-dev.co/test.php';
+
+
+
+        $scope.login = function() {
+
+             $http.post($scope.url, {"username" : $scope.user.username, "password" : $scope.user.password})
+                .success(function(data, status) {
+                    $scope.status = status;
+                    $scope.data = data;
+                    $scope.result = "good";
+                })
+
+                .error(function(data, status) {
+                    $scope.status = status;
+                    $scope.data = data ||  "Request Fail";
+                    $scope.result = "bad";
+                })
+        }
+
+
+
+        /*$http.get("htttp://www.ourdb.com/db/user.php")
             .success(function (response) {
                 $scope.userid = response.users.username
                 $scope.userpw = response.users.password
 
-            })
+            })*/
+
+
 
 
     })
+
+
+/*
+$http({
+    url: "api/getUserData",
+    method: "POST",
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    data: $.param({user_id:app.user_id})
+}).success(function(data, status, headers, config) {
+    $scope.data = data;
+}).error(function(data, status, headers, config) {
+    $scope.status = status;
+});
+*/
