@@ -18,13 +18,17 @@ angular.module('fieldAgent.controllers', [])
                 .success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
-                    $scope.result = "good";
+                    /* if(data.msg = "Success"){
+
+                     }
+*/
+
                 })
 
                 .error(function(data, status) {
                     $scope.status = status;
                     $scope.data = data ||  "Request Fail";
-                    $scope.result = "bad";
+
                 })
         }
 
