@@ -8,7 +8,7 @@ angular.module('fieldAgent.controllers', [])
 
 
         $scope.user = {};
-        $scope.url = 'http://fieldagent.js-dev.co/test.php';
+        $scope.url = 'http://fieldagent.js-dev.co/login.php';
 
 
 
