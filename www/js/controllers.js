@@ -18,10 +18,11 @@ angular.module('fieldAgent.controllers', [])
                 .success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
-                    /* if(data.msg = "Success"){
+                    if(data.msg = "Success"){
+                        window.location = "templates/home.html";
 
                      }
-*/
+
 
                 })
 
@@ -30,6 +31,10 @@ angular.module('fieldAgent.controllers', [])
                     $scope.data = data ||  "Request Fail";
 
                 })
+        }
+
+        $scope.register = function() {
+            window.location = "templates/signup.html";
         }
 
 
