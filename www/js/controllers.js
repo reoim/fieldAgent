@@ -70,6 +70,7 @@ angular.module('fieldAgent.controllers', [])
                     $scope.status = status;
                     $scope.data = data;
                     console.log(data.msg);
+                    console.log(data.user_details);
 
                     if(data.msg == "User created"){
 
