@@ -4,7 +4,7 @@
 angular.module('fieldAgent.controllers', [])
 
 
-.controller("LoginController", function($scope, $http) {
+.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup) {
 
 
         $scope.user = {};
@@ -18,10 +18,19 @@ angular.module('fieldAgent.controllers', [])
                 .success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
-                    if(data.msg = "Success"){
-                        window.location = "templates/home.html";
 
-                     }
+                    if(data.msg == "Success"){
+
+                        $state.go('home');
+
+                     } else {
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Login failed!',
+                            template: data.msg
+                        })
+
+                    }
 
 
                 })
@@ -33,34 +42,57 @@ angular.module('fieldAgent.controllers', [])
                 })
         }
 
-        $scope.register = function() {
-            window.location = "templates/signup.html";
+        $scope.signup = function() {
+            $state.go('signup');
         }
 
 
 
-        /*$http.get("htttp://www.ourdb.com/db/user.php")
-            .success(function (response) {
-                $scope.userid = response.users.username
-                $scope.userpw = response.users.password
 
-            })*/
 
 
 
 
     })
 
+.controller("SignupCtrl", function($scope, $http, $state, $ionicPopup) {
 
-/*
-$http({
-    url: "api/getUserData",
-    method: "POST",
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    data: $.param({user_id:app.user_id})
-}).success(function(data, status, headers, config) {
-    $scope.data = data;
-}).error(function(data, status, headers, config) {
-    $scope.status = status;
-});
-*/
+        $scope.userSignup = {};
+        $scope.url = 'http://fieldagent.js-dev.co/register.php';
+
+        $scope.register = function() {
+
+            $http.post($scope.url, {"username" : $scope.userSignup.username, "password" : $scope.userSignup.password,
+                "re-password" : $scope.userSignup.repw, "email" : $scope.userSignup.useremail,
+                "firstname" : $scope.userSignup.firstname, "lastname" : $scope.userSignup.lastname})
+                .success(function(data, status) {
+
+                    $scope.status = status;
+                    $scope.data = data;
+                    console.log(data.msg);
+
+                    if(data.msg == "User created"){
+
+                        $state.go('login');
+
+                    } else {
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Sign up Failed!',
+                            template: data.msg
+                        })
+
+                    }
+
+
+                })
+
+                .error(function() {
+                    console.log("connection fail");
+
+                })
+        }
+
+    })
+
+
