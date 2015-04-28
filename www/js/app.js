@@ -39,14 +39,20 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'ngMessages'])
 
             .state('home', {
                 url: '/home',
-                templateUrl: "templates/home.html"
-
+                templateUrl: "templates/home.html",
+                controller: 'HomeCtrl'
             })
 
             .state('signup', {
                 url: '/signup',
                 templateUrl: "templates/signup.html",
                 controller: 'SignupCtrl'
+            })
+
+            .state('addhouse', {
+                url: '/addhouse',
+                templateUrl: "templates/addhouse.html"
+
             })
 
         $urlRouterProvider.otherwise('/login');

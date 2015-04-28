@@ -1,8 +1,16 @@
 <ion-view view-title="Home" hide-nav-bar="true">
 <ion-header-bar align-title="center" class="bar-dark">
     <h1 class="title">Home</h1>
+    <button class="button button-clear icon ion-plus-round" ng-click="goAdd()"></button>
 </ion-header-bar>
     <ion-content class="padding">
+
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search">
+            </label>
+        </div>
         <div class="list card">
             <div class="item item-divider">Property List</div>
             <div class="item item-body">

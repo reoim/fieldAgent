@@ -60,6 +60,7 @@ angular.module('fieldAgent.controllers', [])
         $scope.userSignup = {};
         $scope.url = 'http://fieldagent.js-dev.co/register.php';
 
+
         $scope.register = function() {
 
             $http.post($scope.url, {"username" : $scope.userSignup.username, "password" : $scope.userSignup.password,
@@ -97,3 +98,10 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
+.controller("HomeCtrl", function($scope, $http, $state) {
+
+        $scope.goAdd = function(){
+            $state.go('addhouse');
+        }
+
+    })
