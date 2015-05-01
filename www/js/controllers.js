@@ -98,10 +98,70 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("HomeCtrl", function($scope, $http, $state) {
+.controller("HomeCtrl", function($scope, $http, $state, propertyListService) {
+
+
+        propertyListService.getPropertyList().then(function(property_list) {
+           //property_list is an arrary of property object
+        });
+
+
 
         $scope.goAdd = function(){
             $state.go('addhouse');
+
+
+
+
         }
 
     })
+
+
+
+.controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup) {
+
+        $scope.housetypes = [{type: 'House'},{type:'Town house'}, {type:'Apartment'}, {type:'Studio'}, {type:'Unit'}]
+        $scope.houseDetail = {};
+        $scope.url = 'http://fieldagent.js-dev.co/addProperty.php';
+
+
+        $scope.addHouse = function() {
+
+            $http.post($scope.url, {"housetype" : $scope.houseDetail.htype, "address_1" : $scope.houseDetail.address1,
+                "address_2" : $scope.houseDetail.address2, "city" : $scope.houseDetail.city,
+                "state" : $scope.houseDetail.state, "postcode" : $scope.houseDetail.zip, "owner" : $scope.houseDetail.owner,
+                "tenant": $scope.houseDetail.tenant})
+                .success(function(data, status) {
+
+                    $scope.status = status;
+                    $scope.data = data;
+                    console.log(data.msg);
+
+
+                    if(data.msg == "Property created"){
+
+                        $state.go('home');
+
+                    } else {
+
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Task Failed!',
+                            template: data.msg
+                        })
+
+                    }
+
+
+                })
+
+                .error(function() {
+                    console.log("connection fail");
+
+                })
+        }
+
+
+
+    })
+

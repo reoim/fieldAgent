@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'ngMessages'])
+angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -51,7 +51,8 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'ngMessages'])
 
             .state('addhouse', {
                 url: '/addhouse',
-                templateUrl: "templates/addhouse.html"
+                templateUrl: "templates/addhouse.html",
+                controller: 'AddHouseCtrl'
 
             })
 

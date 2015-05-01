@@ -6,32 +6,39 @@
                 <div class="input-label">
                     House Type
                 </div>
-                <select>
-                    <option>House</option>
-                    <option selected>Town House</option>
-                    <option>Apartment</option>
+                <!--<select>-->
+                    <!--<option>House</option>-->
+                    <!--<option selected>Town House</option>-->
+                    <!--<option>Apartment</option>-->
+                <!--</select>-->
+                <select ng-model="houseDetail.htype" ng-options="h.type for h in housetypes">
+                    <option value="" selected>--select type of house--</option>
+
                 </select>
+
+
+
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Address 1" ng-model="addHouse.address1">
+                <input type="text" placeholder="Address 1" ng-model="houseDetail.address1">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Address 2" ng-model="addHouse.address2">
+                <input type="text" placeholder="Address 2" ng-model="houseDetail.address2">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="City" ng-model="addHouse.city">
+                <input type="text" placeholder="City" ng-model="houseDetail.city">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="State" ng-model="addHouse.state">
+                <input type="text" placeholder="State" ng-model="houseDetail.state">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="ZIP" ng-model="addHouse.zip">
+                <input type="text" placeholder="ZIP" ng-model="houseDetail.zip">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Owner" ng-model="addHouse.owner">
+                <input type="text" placeholder="Owner" ng-model="houseDetail.owner">
             </label>
             <label class="item item-input">
-                <input type="text" placeholder="Tenant" ng-model="addHouse.tenant">
+                <input type="text" placeholder="Tenant" ng-model="houseDetail.tenant">
             </label>
         </div>
         <button ng-click="addHouse()" class="button button-block button-dark" >Add Property</button>
