@@ -6,13 +6,15 @@
                 <div class="input-label">
                     House Type
                 </div>
-                <!--<select>-->
-                    <!--<option>House</option>-->
-                    <!--<option selected>Town House</option>-->
-                    <!--<option>Apartment</option>-->
-                <!--</select>-->
-                <select ng-model="houseDetail.htype" ng-options="h.type for h in housetypes">
-                    <option value="" selected>--select type of house--</option>
+
+                <select ng-model="houseDetail.htype" >
+
+
+                    <option value="House" selected>House</option>
+                    <option value="Town House">Town House</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Studio">Studio</option>
+                    <option value="Unit">Unit</option>
 
                 </select>
 

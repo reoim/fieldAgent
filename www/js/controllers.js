@@ -4,7 +4,7 @@
 angular.module('fieldAgent.controllers', [])
 
 
-.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup) {
+.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
 
 
         $scope.user = {};
@@ -20,7 +20,12 @@ angular.module('fieldAgent.controllers', [])
                     $scope.data = data;
 
                     if(data.msg == "Success"){
+                        userIdService.userid = data.userid;
 
+
+
+
+                            //console.log(userIdService.userid);
                         $state.go('home');
 
                      } else {
@@ -98,18 +103,37 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("HomeCtrl", function($scope, $http, $state, propertyListService) {
+.controller("HomeCtrl", function($scope, $http, $state, userIdService) {
 
 
-        propertyListService.getPropertyList().then(function(property_list) {
-           //property_list is an arrary of property object
+        //propertyListService.getPropertyList().then(function(property_list) {
+        //   //property_list is an arrary of property object
+        //});
+
+
+        $scope.property_list = [];
+
+        $http.get("http://fieldagent.js-dev.co/getProperties.php?userid=" + userIdService.userid).then(function(response){
+            property_list = response.data;
+            console.log(property_list);
+            console.log(property_list[0]);
+
+
+        }, function(error){
+            console.log("connection failed");
         });
 
 
 
-        $scope.goAdd = function(){
-            $state.go('addhouse');
 
+
+
+
+
+        $scope.goAdd = function(){
+
+            $state.go('addhouse');
+            //console.log(userIdService.userid);
 
 
 
@@ -119,9 +143,8 @@ angular.module('fieldAgent.controllers', [])
 
 
 
-.controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup) {
+.controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
 
-        $scope.housetypes = [{type: 'House'},{type:'Town house'}, {type:'Apartment'}, {type:'Studio'}, {type:'Unit'}]
         $scope.houseDetail = {};
         $scope.url = 'http://fieldagent.js-dev.co/addProperty.php';
 
@@ -131,7 +154,7 @@ angular.module('fieldAgent.controllers', [])
             $http.post($scope.url, {"housetype" : $scope.houseDetail.htype, "address_1" : $scope.houseDetail.address1,
                 "address_2" : $scope.houseDetail.address2, "city" : $scope.houseDetail.city,
                 "state" : $scope.houseDetail.state, "postcode" : $scope.houseDetail.zip, "owner" : $scope.houseDetail.owner,
-                "tenant": $scope.houseDetail.tenant})
+                "tenant": $scope.houseDetail.tenant, "userid": userIdService.userid})
                 .success(function(data, status) {
 
                     $scope.status = status;
@@ -140,7 +163,7 @@ angular.module('fieldAgent.controllers', [])
 
 
                     if(data.msg == "Property created"){
-
+                        console.log(data.prop_details);
                         $state.go('home');
 
                     } else {
