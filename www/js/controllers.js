@@ -4,7 +4,7 @@
 angular.module('fieldAgent.controllers', [])
 
 
-.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
+.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup, userIdService, propertyListService) {
 
 
         $scope.user = {};
@@ -21,9 +21,6 @@ angular.module('fieldAgent.controllers', [])
 
                     if(data.msg == "Success"){
                         userIdService.userid = data.userid;
-
-
-
 
                             //console.log(userIdService.userid);
                         $state.go('home');
@@ -103,28 +100,26 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("HomeCtrl", function($scope, $http, $state, userIdService) {
-
-
-        //propertyListService.getPropertyList().then(function(property_list) {
-        //   //property_list is an arrary of property object
-        //});
-
-
-        $scope.property_list = [];
-
-        $http.get("http://fieldagent.js-dev.co/getProperties.php?userid=" + userIdService.userid).then(function(response){
-            property_list = response.data;
-            console.log(property_list);
-            console.log(property_list[0]);
-
-
-        }, function(error){
-            console.log("connection failed");
-        });
+.controller("HomeCtrl", function($scope, $http, $state, propertyListService) {
 
 
 
+
+        var vm = this;
+        vm.property = [];
+        vm.getProperty = function(){
+            propertyListService.getProperty()
+                .then(function(property) {
+                    vm.property = property;
+                    $scope.pro = property;
+
+                },
+            function(data) {
+                console.log('failed.')
+            });
+        };
+
+        vm.getProperty();
 
 
 
