@@ -3,6 +3,9 @@
     <h1 class="title">Home</h1>
     <button class="button button-clear icon ion-plus-round" ng-click="goAdd()"></button>
 </ion-header-bar>
+
+
+
     <ion-content class="padding">
 
         <div class="list list-inset">
@@ -13,17 +16,16 @@
         </div>
 
 
+        <ion-list show-delete="false" can-swipe="true">
+            <ion-item ng-repeat="x in pro">
+                <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
+            {{x.address_1}} {{x.address_2}} {{x.city}}
+                </ion-item>
+        </ion-list>
 
-        <div class="list card">
-            <div class="item item-divider">Property list</div>
-            <div class="item item-body">
-                <div>
-                    <p>{{pro[2].address_1}}</p>
 
 
-                </div>
-            </div>
-        </div>
+
 
 
 

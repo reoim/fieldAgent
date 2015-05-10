@@ -11,6 +11,7 @@ angular.module('fieldAgent.services', [])
         var  service = {
             property: [],
             getProperty: getProperty
+
         };
 
         return service;
@@ -32,6 +33,23 @@ angular.module('fieldAgent.services', [])
         }
 
 
+        //function addProperty(){
+        //    var def = $q.defer();
+        //
+        //    $http.post("http://fieldagent.js-dev.co/addProperty.php", {"housetype" : $scope.houseDetail.htype, "address_1" : $scope.houseDetail.address1,
+        //        "address_2" : $scope.houseDetail.address2, "city" : $scope.houseDetail.city,
+        //        "state" : $scope.houseDetail.state, "postcode" : $scope.houseDetail.zip, "owner" : $scope.houseDetail.owner,
+        //        "tenant": $scope.houseDetail.tenant, "userid": userIdService.userid})
+        //        .success(function(data) {
+        //            service.property = data;
+        //            def.resolve(data);
+        //        })
+        //        .error(function() {
+        //            def.reject("Failed to add property");
+        //        });
+        //    return def.promise;
+        //
+        //}
 
 
 

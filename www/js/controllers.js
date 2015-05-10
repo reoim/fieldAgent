@@ -140,6 +140,31 @@ angular.module('fieldAgent.controllers', [])
 
 .controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
 
+
+        //var vm = this;
+        //vm.property = [];
+        //vm.addProperty = function(){
+        //    propertyListService.addProperty()
+        //        .then(function(property) {
+        //            vm.property = property;
+        //            $scope.pmsg = property.msg;
+        //        },
+        //    function(data) {
+        //        console.log('connection failed.')
+        //    });
+        //};
+        //
+        //vm.addProperty();
+        //
+        //if(pmsg = "Property created"){
+        //    $state.go('home');
+        //} else {
+        //    var alertPopup = $ionicPopup.alert( {
+        //        title: 'Task Failed!',
+        //        template: pmsg
+        //    });
+        //};
+
         $scope.houseDetail = {};
         $scope.url = 'http://fieldagent.js-dev.co/addProperty.php';
 
