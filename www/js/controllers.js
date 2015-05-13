@@ -100,7 +100,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("HomeCtrl", function($scope, $http, $state, propertyListService) {
+.controller("HomeCtrl", function($scope, $http, $state, propertyListService, propertyIdService) {
 
 
 
@@ -131,6 +131,14 @@ angular.module('fieldAgent.controllers', [])
             //console.log(userIdService.userid);
 
 
+
+        }
+
+
+        $scope.goDetail = function(x){
+            propertyIdService.propertyid = x.propertyid;
+            $state.go('propertydetail');
+            console.log(propertyIdService.propertyid);
 
         }
 

@@ -57,6 +57,16 @@ angular.module('fieldAgent.services', [])
 
     })
 
+
+
+.factory('propertyIdService', function() {
+        return{
+            propertyid : "defualt"
+        };
+    })
+
+
+
 .factory('userIdService', function() {
 
         return{

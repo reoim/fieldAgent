@@ -56,6 +56,12 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
 
             })
 
+            .state('propertydetail', {
+                url: '/propertydetail',
+                templateUrl: "templates/propertydetail.html"
+                //controller: 'ProDetailCtrl'
+            })
+
         $urlRouterProvider.otherwise('/login');
 
     });
