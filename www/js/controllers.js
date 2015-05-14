@@ -105,6 +105,7 @@ angular.module('fieldAgent.controllers', [])
 
 
 
+
         var vm = this;
         vm.property = [];
         vm.getProperty = function(){
@@ -120,6 +121,7 @@ angular.module('fieldAgent.controllers', [])
         };
 
         vm.getProperty();
+
 
 
 
@@ -192,6 +194,7 @@ angular.module('fieldAgent.controllers', [])
 
                     if(data.msg == "Property created"){
                         console.log(data.prop_details);
+
                         $state.go('home');
 
                     } else {
@@ -216,3 +219,7 @@ angular.module('fieldAgent.controllers', [])
 
     })
 
+
+.controller('ProDetailCtrl', function($scope, $state) {
+
+    })
