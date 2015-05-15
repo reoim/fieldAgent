@@ -156,7 +156,7 @@ angular.module('fieldAgent.controllers', [])
         $scope.addInspection = function() {
 
             var today = new Date();
-            $scope.url = 'http://fieldagent.js-dev.co/addInsepctCase.php';
+            $scope.url = 'http://fieldagent.js-dev.co/addInspectCase.php';
 
             $http.post($scope.url, {"date" : today, "propertyid" : propertyDetailService.propertyid})
                 .success(function (data) {
