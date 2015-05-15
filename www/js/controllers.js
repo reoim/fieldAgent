@@ -162,6 +162,20 @@ angular.module('fieldAgent.controllers', [])
                 .success(function (data) {
                     $scope.data = data;
                     console.log(data.msg);
+
+                    if(data.msg == "Inspection Case created") {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Success',
+                            template: data.msg
+                        })
+                    } else {
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Fail',
+                            template: data.msg
+                        })
+                    }
+
+
                 })
 
         }
