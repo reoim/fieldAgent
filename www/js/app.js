@@ -38,6 +38,7 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
             })
 
             .state('home', {
+                cache: false,
                 url: '/home',
                 templateUrl: "templates/home.html",
                 controller: 'HomeCtrl'
@@ -50,6 +51,7 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
             })
 
             .state('addhouse', {
+                cache: false,
                 url: '/addhouse',
                 templateUrl: "templates/addhouse.html",
                 controller: 'AddHouseCtrl'
@@ -57,6 +59,7 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
             })
 
             .state('propertydetail', {
+                cache: false,
                 url: '/propertydetail',
                 templateUrl: "templates/propertydetail.html",
                 controller: 'ProDetailCtrl'

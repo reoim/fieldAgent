@@ -3,6 +3,35 @@
  */
 angular.module('fieldAgent.services', [])
 
+.factory('propertyDetailService', function($http, propertyIdService, $q) {
+
+        var service = {
+            propertyDetail: [],
+            getPropertyDetail: getPropertyDetail
+        };
+        return service;
+
+        function getPropertyDetail() {
+            var def = $q.defer();
+
+            $http.get("http://fieldagent.js-dev.co/getPropertyDetail.php?propertyid=" + propertyIdService.propertyid)
+                .success(function(data) {
+                    service.propertyDetail = data;
+                    def.resolve(data);
+                })
+                .error(function() {
+                    def.reject("Failed to get property detail");
+
+                });
+            return def.promise;
+
+        }
+
+
+
+
+    })
+
 
 .factory('propertyListService',function($http, userIdService, $q) {
 

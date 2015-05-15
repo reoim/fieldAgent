@@ -3,32 +3,34 @@
 
         <div class="card">
             <div class="item item-divider">
-                test
+                {{proDetail.address_1}} {{proDetail.address_2}}
 
                 <button class="button-clear ion-edit"></button>
             </div>
             <div class="item-text-wrap">
                 <ul>
-                    <li>Type: </li>
-                    <li>City: </li>
-                    <li>State: </li>
-                    <li>ZIP: </li>
-                    <li>Owner: </li>
-                    <li>Tenant: </li>
+                    <li>Type: {{proDetail.housetype}}</li>
+                    <li>City: {{proDetail.city}}</li>
+                    <li>State: {{proDetail.state}}</li>
+                    <li>ZIP: {{proDetail.postcode}}</li>
+                    <li>Owner: {{proDetail.owner}}</li>
+                    <li>Tenant: {{proDetail.tenant}}</li>
                 </ul>
             </div>
         </div>
 
-        <ion-list>
-            <ion-item class="item-button-right">
-                test
-                <div class="button">
-                    <button class="button-clear">
-                        <i class="ion-plus-round"></i>
-                    </button>
-                </div>
-            </ion-item>
-        </ion-list>
+        <div class="list">
+            <div class="item item-divider">
+                Inspection Cases
+
+                    <button class="button-clear ion-plus-round" ng-click="addInspection()"></button>
+
+            </div>
+            <a class="item" href="#">
+                sample inspection
+            </a>
+        </div>
+
 
     </ion-content>
 </ion-view>

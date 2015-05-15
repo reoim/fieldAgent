@@ -102,13 +102,9 @@ angular.module('fieldAgent.controllers', [])
 
 .controller("HomeCtrl", function($scope, $http, $state, propertyListService, propertyIdService) {
 
-
-
-
-
         var vm = this;
         vm.property = [];
-        vm.getProperty = function(){
+        vm.getProperty = function() {
             propertyListService.getProperty()
                 .then(function(property) {
                     vm.property = property;
@@ -116,64 +112,64 @@ angular.module('fieldAgent.controllers', [])
 
                 },
             function(data) {
-                console.log('failed.')
+                console.log('getProperty method is failed.')
             });
         };
 
         vm.getProperty();
 
 
-
-
-
-
         $scope.goAdd = function(){
-
             $state.go('addhouse');
-            //console.log(userIdService.userid);
-
-
-
         }
 
 
         $scope.goDetail = function(x){
             propertyIdService.propertyid = x.propertyid;
             $state.go('propertydetail');
-            console.log(propertyIdService.propertyid);
+            //console.log(propertyIdService.propertyid);
 
         }
 
     })
 
+.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, $filter) {
 
+        var vm = this;
+        vm.propertyDetail = [];
+        vm.getPropertyDetail = function() {
+            propertyDetailService.getPropertyDetail()
+                .then(function(propertyDetail) {
+                    vm.propertyDetail = propertyDetail;
+                    $scope.proDetail = propertyDetail;
+                },
+                function(data) {
+                    console.log('getPropertyDetail method is Failed')
+                });
+        };
+
+        vm.getPropertyDetail();
+
+
+
+
+        $scope.addInspection = function() {
+
+            var today = new Date();
+            $scope.url = 'http://fieldagent.js-dev.co/addInsepctCase.php';
+
+            $http.post($scope.url, {"date" : today, "propertyid" : propertyDetailService.propertyid})
+                .success(function (data) {
+                    $scope.data = data;
+                    console.log(data.msg);
+                })
+
+        }
+
+})
 
 .controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
 
-
-        //var vm = this;
-        //vm.property = [];
-        //vm.addProperty = function(){
-        //    propertyListService.addProperty()
-        //        .then(function(property) {
-        //            vm.property = property;
-        //            $scope.pmsg = property.msg;
-        //        },
-        //    function(data) {
-        //        console.log('connection failed.')
-        //    });
-        //};
-        //
-        //vm.addProperty();
-        //
-        //if(pmsg = "Property created"){
-        //    $state.go('home');
-        //} else {
-        //    var alertPopup = $ionicPopup.alert( {
-        //        title: 'Task Failed!',
-        //        template: pmsg
-        //    });
-        //};
 
         $scope.houseDetail = {};
         $scope.url = 'http://fieldagent.js-dev.co/addProperty.php';
@@ -220,6 +216,3 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller('ProDetailCtrl', function($scope, $state) {
-
-    })
