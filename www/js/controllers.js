@@ -127,13 +127,13 @@ angular.module('fieldAgent.controllers', [])
         $scope.goDetail = function(x){
             propertyIdService.propertyid = x.propertyid;
             $state.go('propertydetail');
-            //console.log(propertyIdService.propertyid);
+            console.log(propertyIdService.propertyid);
 
         }
 
     })
 
-.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, $filter) {
+.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, inspectionService) {
 
         var vm = this;
         vm.propertyDetail = [];
@@ -150,12 +150,29 @@ angular.module('fieldAgent.controllers', [])
 
         vm.getPropertyDetail();
 
+        vm.inspectionList = [];
+        vm.getInspectionList = function() {
+            inspectionService.getInspectionList()
+                .then(function(inspectionList) {
+                    vm.inspectionList = inspectionList;
+                    $scope.insList = inspectionList;
+                },
+                function(data) {
+                    console.log('getInspectionList method is Failed')
+                });
+        };
+
+        vm.getInspectionList();
+
+
+
 
 
 
         $scope.addInspection = function() {
 
             var today = new Date();
+            console.log(today);
             $scope.url = 'http://fieldagent.js-dev.co/addInspectCase.php';
 
             $http.post($scope.url, {"date" : today, "propertyid" : propertyDetailService.propertyid})
