@@ -26,23 +26,13 @@
                     <button class="button-clear ion-plus-round" ng-click="addInspection()"></button>
 
             </div>
-            <a class="item" href="#" ng-repeat="x in insList">
+            <a class="item" href="#" ng-repeat="x in insList" ng-click="goInspection(x)">
                 {{x.date}}
             </a>
         </div>
 
 
-        <!--<ion-list>-->
-            <!--<div class="item item-divider">-->
-                <!--Inspection Cases-->
 
-                <!--<button class="button-clear ion-plus-round" ng-click="addInspection()"></button>-->
-
-            <!--</div>-->
-            <!--<ion-item ng-repeat="x in insList" ng-click="goInspectionDetail(x)">-->
-            <!--{{x.date}}-->
-            <!--</ion-item>-->
-        <!--</ion-list>-->
 
     </ion-content>
 </ion-view>

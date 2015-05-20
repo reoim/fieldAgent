@@ -65,6 +65,13 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
                 controller: 'ProDetailCtrl'
             })
 
+            .state('inspection', {
+                cache: false,
+                url: '/inspection',
+                templateUrl: "templates/inspection.html",
+                controller: 'inspectionCtrl'
+            })
+
         $urlRouterProvider.otherwise('/login');
 
     });

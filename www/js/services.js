@@ -86,8 +86,6 @@ angular.module('fieldAgent.services', [])
         };
     })
 
-
-
 .factory('userIdService', function() {
 
         return{
@@ -96,6 +94,11 @@ angular.module('fieldAgent.services', [])
 
     })
 
+.factory('caseIdService', function() {
+        return{
+            caseid : "defualt"
+        };
+    })
 
 
 

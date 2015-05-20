@@ -133,7 +133,7 @@ angular.module('fieldAgent.controllers', [])
 
     })
 
-.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, inspectionService) {
+.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, inspectionService, propertyIdService, caseIdService ,$filter) {
 
         var vm = this;
         vm.propertyDetail = [];
@@ -166,25 +166,34 @@ angular.module('fieldAgent.controllers', [])
 
 
 
-
-
-
         $scope.addInspection = function() {
 
             var today = new Date();
+            var todayFilter = $filter('date')(today, "yyyy-MM-dd");
+
             console.log(today);
             $scope.url = 'http://fieldagent.js-dev.co/addInspectCase.php';
 
-            $http.post($scope.url, {"date" : today, "propertyid" : propertyDetailService.propertyid})
+            console.log(propertyIdService.propertyid);
+
+            $http.post($scope.url, {"date" : todayFilter, "propertyid" : propertyIdService.propertyid})
                 .success(function (data) {
                     $scope.data = data;
                     console.log(data.msg);
 
                     if(data.msg == "Inspection Case created") {
-                        var alertPopup = $ionicPopup.alert({
+                        var alertPopup = $ionicPopup.show({
                             title: 'Success',
-                            template: data.msg
-                        })
+                            template: data.msg,
+                            buttons:[{
+                                text: 'OK',
+                                type: 'button-positive',
+                                onTap: function(e) {
+                                    $state.go($state.current, {}, {reload: true});
+                                }
+                            }]
+                        });
+
                     } else {
                         var alertPopup = $ionicPopup.alert({
                             title: 'Fail',
@@ -195,6 +204,12 @@ angular.module('fieldAgent.controllers', [])
 
                 })
 
+        }
+
+        $scope.goInspection = function(x){
+            caseIdService.caseid = x.caseid;
+            $state.go('inspection');
+            console.log(caseIdService.caseid);
         }
 
 })
@@ -247,3 +262,6 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
+.controller("inspectionCtrl", function($scope) {
+
+    })
