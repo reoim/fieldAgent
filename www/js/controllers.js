@@ -264,4 +264,6 @@ angular.module('fieldAgent.controllers', [])
 
 .controller("inspectionCtrl", function($scope) {
 
+
+
     })
