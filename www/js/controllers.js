@@ -313,9 +313,9 @@ angular.module('fieldAgent.controllers', [])
         };
         vm.getArea();
 
-        $scope.contact = {
-            name: 'Mittens Cat',
-            info: 'Tap anywhere on the card to open the modal'
+        $scope.inspectedArea = {
+            note: '',
+            status: ''
         }
 
         $ionicModal.fromTemplateUrl('contact-modal.html', {
