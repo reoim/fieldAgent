@@ -1,9 +1,25 @@
 <ion-view view-title="Inspection Case" name="inspection-view">
     <ion-nav-buttons side="secondary">
-    <button class="button button-clear icon ion-plus-round" ng-click="addArea()">
-    </button>
+
     </ion-nav-buttons>
     <ion-content class="padding">
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Area" ng-model="area.name">
+            </label>
+        </div>
+        <button ng-click="addArea()" class="button button-block button-positive">Add Area</button>
+
+    <div class="list">
+        <div class="item item-divider">
+            Click area to inspect
+        </div>
+        <a class="item" ng-repeat="x in area" ng-click="goAreaDetail(x)">
+        {{x.area_name}}
+        </a>
+
+    </div>
+
 
     </ion-content>
 </ion-view>

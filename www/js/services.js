@@ -78,6 +78,29 @@ angular.module('fieldAgent.services', [])
         }
     })
 
+.factory('areaService', function($http, $q, propertyIdService) {
+
+        var service = {
+            areaList: [],
+            getArea: getArea
+        };
+        return service;
+
+        function getArea(){
+            var def = $q.defer();
+            $http.get("http://fieldagent.js-dev.co/getAreas.php?propertyid=" + propertyIdService.propertyid)
+                .success(function(data) {
+                    service.areaList = data;
+                    def.resolve(data);
+                })
+                .error(function() {
+                    def.reject("Failed to get area list");
+                });
+            return def.promise;
+
+        }
+    })
+
 
 
 .factory('propertyIdService', function() {

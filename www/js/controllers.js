@@ -223,15 +223,21 @@ angular.module('fieldAgent.controllers', [])
 
         $scope.addHouse = function() {
 
-            $http.post($scope.url, {"housetype" : $scope.houseDetail.htype, "address_1" : $scope.houseDetail.address1,
-                "address_2" : $scope.houseDetail.address2, "city" : $scope.houseDetail.city,
-                "state" : $scope.houseDetail.state, "postcode" : $scope.houseDetail.zip, "owner" : $scope.houseDetail.owner,
-                "tenant": $scope.houseDetail.tenant, "userid": userIdService.userid})
+            $http.post($scope.url, {
+                "housetype" : $scope.houseDetail.htype,
+                "address_1" : $scope.houseDetail.address1,
+                "address_2" : $scope.houseDetail.address2,
+                "city" : $scope.houseDetail.city,
+                "state" : $scope.houseDetail.state,
+                "postcode" : $scope.houseDetail.zip,
+                "owner" : $scope.houseDetail.owner,
+                "tenant": $scope.houseDetail.tenant,
+                "userid": userIdService.userid})
                 .success(function(data, status) {
 
                     $scope.status = status;
                     $scope.data = data;
-                    console.log(data.msg);
+
 
 
                     if(data.msg == "Property created"){
@@ -262,8 +268,48 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService) {
 
 
+        $scope.area={};
+        $scope.url = 'http://fieldagent.js-dev.co/addArea.php';
+        $scope.addArea = function() {
+            $http.post($scope.url, {
+                "propertyid": propertyIdService.propertyid,
+                "area_name": $scope.area.name,
+                "active": "1",
+                "caseid": caseIdService.caseid})
+                .success(function(data) {
+                    $scope.data = data;
 
+                    if(!data){
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Task Faield',
+                            template: 'Cannot connect to server'
+                        })
+                    } else {
+                        $state.go($state.current, {}, {reload: true});
+                    }
+
+
+                })
+                .error(function() {
+                    console.log("connection to create area failed.")
+                })
+        }
+
+
+        var vm = this;
+        vm.areaList = [];
+        vm.getArea = function() {
+            areaService.getArea()
+                .then(function(areaList) {
+                    vm.areaList = areaList;
+                    $scope.area = areaList;
+                },
+            function(data) {
+               console.log('getArea method is failed')
+            });
+        };
+        vm.getArea();
     })
