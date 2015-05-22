@@ -8,7 +8,7 @@ angular.module('fieldAgent.controllers', [])
 
 
         $scope.user = {};
-        $scope.url = '//fieldagent.js-dev.co/login.php';
+        $scope.url = 'https://fieldagent.js-dev.co/login.php';
 
 
 
@@ -60,7 +60,7 @@ angular.module('fieldAgent.controllers', [])
 .controller("SignupCtrl", function($scope, $http, $state, $ionicPopup) {
 
         $scope.userSignup = {};
-        $scope.url = 'http://fieldagent.js-dev.co/register.php';
+        $scope.url = 'https://fieldagent.js-dev.co/register.php';
 
 
         $scope.register = function() {
@@ -172,7 +172,7 @@ angular.module('fieldAgent.controllers', [])
             var todayFilter = $filter('date')(today, "yyyy-MM-dd");
 
             console.log(today);
-            $scope.url = 'http://fieldagent.js-dev.co/addInspectCase.php';
+            $scope.url = 'https://fieldagent.js-dev.co/addInspectCase.php';
 
             console.log(propertyIdService.propertyid);
 
@@ -218,7 +218,7 @@ angular.module('fieldAgent.controllers', [])
 
 
         $scope.houseDetail = {};
-        $scope.url = 'http://fieldagent.js-dev.co/addProperty.php';
+        $scope.url = 'https://fieldagent.js-dev.co/addProperty.php';
 
 
         $scope.addHouse = function() {
@@ -272,7 +272,7 @@ angular.module('fieldAgent.controllers', [])
 
 
         $scope.area={};
-        $scope.url = 'http://fieldagent.js-dev.co/addArea.php';
+        $scope.url = 'https://fieldagent.js-dev.co/addArea.php';
         $scope.addArea = function() {
             $http.post($scope.url, {
                 "propertyid": propertyIdService.propertyid,

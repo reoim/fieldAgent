@@ -14,7 +14,7 @@ angular.module('fieldAgent.services', [])
         function getPropertyDetail() {
             var def = $q.defer();
 
-            $http.get("http://fieldagent.js-dev.co/getPropertyDetail.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getPropertyDetail.php?propertyid=" + propertyIdService.propertyid)
                 .success(function(data) {
                     service.propertyDetail = data;
                     def.resolve(data);
@@ -44,7 +44,7 @@ angular.module('fieldAgent.services', [])
         function getProperty(){
             var def = $q.defer();
 
-            $http.get("http://fieldagent.js-dev.co/getProperties.php?userid=" + userIdService.userid)
+            $http.get("https://fieldagent.js-dev.co/getProperties.php?userid=" + userIdService.userid)
                 .success(function(data) {
                     service.property = data;
                     def.resolve(data);
@@ -66,7 +66,7 @@ angular.module('fieldAgent.services', [])
 
         function getInspectionList(){
             var def = $q.defer();
-            $http.get("http://fieldagent.js-dev.co/getPropertyCases.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getPropertyCases.php?propertyid=" + propertyIdService.propertyid)
                 .success(function(data) {
                     service.inspectionList = data;
                     def.resolve(data);
@@ -88,7 +88,7 @@ angular.module('fieldAgent.services', [])
 
         function getArea(){
             var def = $q.defer();
-            $http.get("http://fieldagent.js-dev.co/getAreas.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getAreas.php?propertyid=" + propertyIdService.propertyid)
                 .success(function(data) {
                     service.areaList = data;
                     def.resolve(data);
