@@ -8,7 +8,7 @@ angular.module('fieldAgent.controllers', [])
 
 
         $scope.user = {};
-        $scope.url = '//fieldagent.js-dev.co/login.php';
+        $scope.url = 'http://fieldagent.js-dev.co/login.php';
 
 
 
@@ -268,7 +268,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal) {
 
 
         $scope.area={};
@@ -312,4 +312,28 @@ angular.module('fieldAgent.controllers', [])
             });
         };
         vm.getArea();
+
+        $scope.contact = {
+            name: 'Mittens Cat',
+            info: 'Tap anywhere on the card to open the modal'
+        }
+
+        $ionicModal.fromTemplateUrl('contact-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal
+        })
+
+        $scope.openModal = function() {
+            $scope.modal.show()
+        }
+
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+
+        $scope.$on('$destroy', function() {
+            $scope.modal.remove();
+        });
     })
