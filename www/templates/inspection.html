@@ -26,6 +26,7 @@
 
 
 <script id="contact-modal.html" type="text/ng-template">
+
     <div class="modal">
         <ion-header-bar>
             <h1 class="title">Inspect Area</h1>
@@ -44,7 +45,10 @@
                 <!--</label>-->
             </div>
 
-            <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
+            <img ng-src="{{resizedPhoto}}" />
+            <button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>
+            <button class="button button-full button-positive" ng-click="closeModal()">Done</button>
         </ion-content>
     </div>
+
 </script>

@@ -268,7 +268,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera) {
 
 
         $scope.area={};
@@ -336,4 +336,40 @@ angular.module('fieldAgent.controllers', [])
         $scope.$on('$destroy', function() {
             $scope.modal.remove();
         });
+
+        $scope.getPhoto = function() {
+            Camera.getPicture().then(function(imageURI) {
+                $scope.lastPhoto = imageURI;
+                var MAX_WIDTH = 50;
+                var MAX_HEIGHT = 50;
+                var width = img.width;
+                var height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(imageURI, 0, 0, width, height);
+                $scope.resizedPhoto = ctx.toDataURL();
+            }, function(err) {
+                console.err(err);
+            }, {
+                quality: 75,
+                targetWidth: 320,
+                targetHeight: 320,
+                saveToPhotoAlbum: false
+            });
+
+        };
+
     })
