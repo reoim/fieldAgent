@@ -268,34 +268,50 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService) {
 
+
+        $scope.goInspectionDetail = function(){
+
+            $state.go('inspectionDetail');
+
+        }
 
         $scope.area={};
         $scope.url = 'https://fieldagent.js-dev.co/addArea.php';
         $scope.addArea = function() {
-            $http.post($scope.url, {
-                "propertyid": propertyIdService.propertyid,
-                "area_name": $scope.area.name,
-                "active": "1",
-                "caseid": caseIdService.caseid})
-                .success(function(data) {
-                    $scope.data = data;
+            if ($scope.area.name == null) {
 
-                    if(!data){
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Task Faield',
-                            template: 'Cannot connect to server'
-                        })
-                    } else {
-                        $state.go($state.current, {}, {reload: true});
-                    }
-
-
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Area cannot be empty',
+                    template: 'Please fill area name'
                 })
-                .error(function() {
-                    console.log("connection to create area failed.")
+
+            } else {
+                $http.post($scope.url, {
+                    "propertyid": propertyIdService.propertyid,
+                    "area_name": $scope.area.name,
+                    "active": "1",
+                    "caseid": caseIdService.caseid
                 })
+                    .success(function (data) {
+                        $scope.data = data;
+
+                        if (!data) {
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Task Faield',
+                                template: 'Cannot connect to server'
+                            })
+                        } else {
+                            $state.go($state.current, {}, {reload: true});
+                        }
+
+
+                    })
+                    .error(function () {
+                        console.log("connection to create area failed.")
+                    })
+            }
         }
 
 
@@ -321,16 +337,35 @@ angular.module('fieldAgent.controllers', [])
 
 
 
+
+    })
+
+.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera) {
+
+
+        $scope.areaStatus="Good";
+        $scope.pushNotificationChange = function() {
+            console.log('Push Notification Change', $scope.pushNotification.checked);
+            if($scope.pushNotification.checked){
+                $scope.areaStatus="Good";
+            }else{
+                $scope.areaStatus="Bad";
+            }
+        };
+
+        $scope.pushNotification = { checked: true };
+
+
         $ionicModal.fromTemplateUrl('contact-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal) {
             $scope.modal = modal
-        })
+        });
 
         $scope.openModal = function() {
             $scope.modal.show()
-        }
+        };
 
         $scope.closeModal = function() {
             $scope.modal.hide();
@@ -356,6 +391,7 @@ angular.module('fieldAgent.controllers', [])
             });
 
         };
+
 
     })
 

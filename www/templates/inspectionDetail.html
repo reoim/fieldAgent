@@ -1,0 +1,55 @@
+<ion-view view-title="Inspection Detail" name="inspectionDetail-view" >
+    <ion-content class="padding">
+        <!--<div class="list">-->
+            <!--<item class="item item-icon-left"><i class="icon ion-compose"></i>-->
+                <!--<label class="item item-input">-->
+                    <!--<span class="input-label"></span>-->
+                    <!--<textarea ng-model="inspectedArea.note" name="posttext" rows="4"></textarea>-->
+
+                <!--</label>-->
+                <!--<div class="card">-->
+                    <!--<div class="item item-text-wrap">-->
+                        <!--This is a basic Card which contains an item that has wrapping text.-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</item>-->
+        <!--</div>-->
+        <div class="item item-divider">
+            <i class="icon ion-home"></i>
+            Status
+
+        </div>
+        <ion-toggle ng-model="pushNotification.checked"
+                    ng-change="pushNotificationChange()">
+            Status: {{areaStatus}}
+        </ion-toggle>
+        <!--<ion-toggle ng-model="areaStatus" toggle-class="toggle-calm">Status</ion-toggle>-->
+
+
+
+        <div class="item item-divider">
+            <i class="icon ion-compose "></i>
+            Note
+
+        </div>
+
+        <a class="item item-list-detail">
+
+        </a>
+
+
+        <div class="item item-divider">
+            <i class="ion-images"></i>
+            Area Images
+        </div>
+
+        <a class="item item-list-detail">
+            <ion-scroll direction="x">
+                <img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
+            </ion-scroll>
+        </a>
+        <button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>
+        <button class="button button-full button-positive" ng-click="closeModal()">Done</button>
+    </ion-content>
+</ion-view>

@@ -14,7 +14,7 @@
         <div class="item item-divider">
             Click area to inspect
         </div>
-        <a class="item" ng-repeat="x in area" ng-click="openModal()">
+        <a class="item" ng-repeat="x in area" ng-click="goInspectionDetail()">
         {{x.area_name}}
         </a>
 
@@ -39,10 +39,7 @@
                     <textarea ng-model="inspectedArea.note" name="posttext" rows="4"></textarea>
 
                 </label>
-                <!--<label class="item item-input">-->
-                    <!--<span class="input-label">status</span>-->
-                    <!--<input type="text" ng-model="inspectedArea.status">-->
-                <!--</label>-->
+                </item>
             </div>
 
             <div class="item item-divider">
