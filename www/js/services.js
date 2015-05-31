@@ -14,7 +14,7 @@ angular.module('fieldAgent.services', [])
         function getPropertyDetail() {
             var def = $q.defer();
 
-            $http.get("https://fieldagent.js-dev.co/getPropertyDetail.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getPropertyDetail.php", {params: {"propertyid": propertyIdService.propertyid}})
                 .success(function(data) {
                     service.propertyDetail = data;
                     def.resolve(data);
@@ -43,8 +43,7 @@ angular.module('fieldAgent.services', [])
         //implementation
         function getProperty(){
             var def = $q.defer();
-
-            $http.get("https://fieldagent.js-dev.co/getProperties.php?userid=" + userIdService.userid)
+            $http.get("https://fieldagent.js-dev.co/getProperties.php", {params: {"userid": userIdService.userid}})
                 .success(function(data) {
                     service.property = data;
                     def.resolve(data);
@@ -66,7 +65,7 @@ angular.module('fieldAgent.services', [])
 
         function getInspectionList(){
             var def = $q.defer();
-            $http.get("https://fieldagent.js-dev.co/getPropertyCases.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getPropertyCases.php", {params: {"propertyid": propertyIdService.propertyid}})
                 .success(function(data) {
                     service.inspectionList = data;
                     def.resolve(data);
@@ -88,7 +87,7 @@ angular.module('fieldAgent.services', [])
 
         function getArea(){
             var def = $q.defer();
-            $http.get("https://fieldagent.js-dev.co/getAreas.php?propertyid=" + propertyIdService.propertyid)
+            $http.get("https://fieldagent.js-dev.co/getAreas.php", {params: {"propertyid": propertyIdService.propertyid}})
                 .success(function(data) {
                     service.areaList = data;
                     def.resolve(data);
@@ -100,6 +99,29 @@ angular.module('fieldAgent.services', [])
 
         }
     })
+
+.factory('areaDetailService', function($http, $q, caseIdService, areaIdService) {
+
+    var service = {
+        areaDetail: [],
+        getAreaDetail: getAreaDetail
+    };
+    return service;
+
+    function getAreaDetail(){
+        var def = $q.defer();
+        $http.get("https://fieldagent.js-dev.co/getInspectedArea.php", {params: {"caseid": caseIdService.caseid, "areaid": areaIdService.areaid}})
+            .success(function(data) {
+                service.areaDetail = data;
+                def.resolve(data);
+            })
+            .error(function() {
+                def.reject("Failed to get area Detail");
+            });
+        return def.promise;
+
+    }
+})
 
 
 
@@ -146,7 +168,7 @@ angular.module('fieldAgent.services', [])
 
 .factory('areaIdService', function() {
     return{
-        areaid : "defualt"
+        areaid : "default"
     };
 })
 

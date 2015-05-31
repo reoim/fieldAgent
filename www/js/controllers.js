@@ -268,7 +268,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService, areaDetailService) {
 
 
         $scope.goInspectionDetail = function(){
@@ -330,36 +330,48 @@ angular.module('fieldAgent.controllers', [])
         };
         vm.getArea();
 
-        $scope.inspectedArea = {
-            note: '',
-            status: ''
-        }
 
-//test
-        $scope.groups = [];
-        for (var i=0; i<10; i++) {
-            $scope.groups[i] = {
-                name: i,
-                items: []
-            };
-            for (var j=0; j<3; j++) {
-                $scope.groups[i].items.push(i + '-' + j);
-            }
-        }
+        vm.areaDetail = [];
+        vm.getAreaDetail = function() {
+            areaDetailService.getAreaDetail()
+                .then(function(areaDetail) {
+                    vm.areaDetail = areaDetail;
+                    $scope.areaInspectionDetail = areaDetail;
+                    console.log(areaIdService.areaid);
+                    console.log($scope.areaInspectionDetail);
+                },
+                function(data) {
+                    console.log('getAreaDetail method failed.')
+                });
+        };
+
+
+
 
         /*
-         * if given group is the selected group, deselect it
-         * else, select the given group
+         * if given area is the selected area, deselect it
+         * else, select the given area
          */
-        $scope.toggleGroup = function(group) {
-            if ($scope.isGroupShown(group)) {
-                $scope.shownGroup = null;
+        $scope.toggleArea = function(area) {
+
+            if (areaIdService.areaid=area.areaid){
+                vm.getAreaDetail();
             } else {
-                $scope.shownGroup = group;
+                console.log("Faield to assign areaid for getAreaDetail()")
+            }
+
+
+
+
+
+            if ($scope.isAreaShown(area)) {
+                $scope.shownArea = null;
+            } else {
+                $scope.shownArea = area;
             }
         };
-        $scope.isGroupShown = function(group) {
-            return $scope.shownGroup === group;
+        $scope.isAreaShown = function(area) {
+            return $scope.shownArea === area;
         };
 
 

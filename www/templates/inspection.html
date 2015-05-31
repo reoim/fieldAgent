@@ -24,17 +24,44 @@
         <ion-list>
             <div ng-repeat="area in areas">
                 <ion-item class="item-stable"
-                          ng-click="toggleGroup(area)"
-                          ng-class="{active: isGroupShown(area)}">
-                    <i class="icon" ng-class="isGroupShown(area) ? 'ion-minus' : 'ion-plus'"></i>
+                          ng-click="toggleArea(area)"
+                          ng-class="{active: isAreaShown(area)}">
+                    <i class="icon" ng-class="isAreaShown(area) ? 'ion-minus' : 'ion-plus'"></i>
                     &nbsp;
                     {{area.area_name}}
                 </ion-item>
-                <ion-item class="item-accordion"
-                          ng-repeat="item in group.items"
-                          ng-show="isGroupShown(area)">
-                    {{item}}
+                <ion-item class="item-accordion" ng-show="isAreaShown(area)" >
+
+
+
+                    <div class="item item-divider">
+                        <i class="icon ion-compose "></i>
+                        Inspection Detail
+
+                    </div>
+
+                    <a class="item item-list-detail" ng-click="goInspectionDetail()">
+                        Status: {{areaInspectionDetail.status}} <br>
+                        Note: {{areaInspectionDetail.note}}
+                    </a>
+
+                    <!--Status: {{areaInspectionDetail.status}}-->
+                    <!--<br>-->
+                    <!--Note: {{areaInspectionDetail.note}}-->
+                    <!--<br><br>-->
+                    <div class="item item-divider">
+                        <i class="ion-images"></i>
+                        Area Images
+                    </div>
+                    <a class="item item-list-detail">
+                        <ion-scroll direction="x">
+                            <img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
+                        </ion-scroll>
+                    </a>
                 </ion-item>
+
+
+
             </div>
         </ion-list>
 
