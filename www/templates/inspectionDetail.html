@@ -1,20 +1,6 @@
 <ion-view view-title="Inspection Detail" name="inspectionDetail-view" >
     <ion-content class="padding">
-        <!--<div class="list">-->
-            <!--<item class="item item-icon-left"><i class="icon ion-compose"></i>-->
-                <!--<label class="item item-input">-->
-                    <!--<span class="input-label"></span>-->
-                    <!--<textarea ng-model="inspectedArea.note" name="posttext" rows="4"></textarea>-->
 
-                <!--</label>-->
-                <!--<div class="card">-->
-                    <!--<div class="item item-text-wrap">-->
-                        <!--This is a basic Card which contains an item that has wrapping text.-->
-                    <!--</div>-->
-                <!--</div>-->
-
-            <!--</item>-->
-        <!--</div>-->
         <div class="item item-divider">
             <i class="icon ion-home"></i>
             Status
@@ -24,9 +10,6 @@
                     ng-change="pushNotificationChange()">
             Status: {{areaStatus}}
         </ion-toggle>
-        <!--<ion-toggle ng-model="areaStatus" toggle-class="toggle-calm">Status</ion-toggle>-->
-
-
 
         <div class="item item-divider">
             <i class="icon ion-compose "></i>
@@ -52,4 +35,7 @@
         <button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>
         <button class="button button-full button-positive" ng-click="closeModal()">Done</button>
     </ion-content>
+
+
+
 </ion-view>

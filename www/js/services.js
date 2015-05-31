@@ -101,6 +101,9 @@ angular.module('fieldAgent.services', [])
         }
     })
 
+
+
+
 .factory('Camera', ['$q', function($q) {
 
     return {
@@ -140,6 +143,12 @@ angular.module('fieldAgent.services', [])
             caseid : "defualt"
         };
     })
+
+.factory('areaIdService', function() {
+    return{
+        areaid : "defualt"
+    };
+})
 
 
 

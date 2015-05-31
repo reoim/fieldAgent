@@ -268,7 +268,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService) {
+.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService) {
 
 
         $scope.goInspectionDetail = function(){
@@ -321,7 +321,8 @@ angular.module('fieldAgent.controllers', [])
             areaService.getArea()
                 .then(function(areaList) {
                     vm.areaList = areaList;
-                    $scope.area = areaList;
+                    $scope.areas = areaList;
+                    //console.log($scope.areas[0]);
                 },
             function(data) {
                console.log('getArea method is failed')
@@ -334,13 +335,38 @@ angular.module('fieldAgent.controllers', [])
             status: ''
         }
 
+//test
+        $scope.groups = [];
+        for (var i=0; i<10; i++) {
+            $scope.groups[i] = {
+                name: i,
+                items: []
+            };
+            for (var j=0; j<3; j++) {
+                $scope.groups[i].items.push(i + '-' + j);
+            }
+        }
 
+        /*
+         * if given group is the selected group, deselect it
+         * else, select the given group
+         */
+        $scope.toggleGroup = function(group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
+            } else {
+                $scope.shownGroup = group;
+            }
+        };
+        $scope.isGroupShown = function(group) {
+            return $scope.shownGroup === group;
+        };
 
 
 
     })
 
-.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera) {
+.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera, areaIdService) {
 
 
         $scope.areaStatus="Good";
@@ -391,6 +417,9 @@ angular.module('fieldAgent.controllers', [])
             });
 
         };
+
+
+
 
 
     })

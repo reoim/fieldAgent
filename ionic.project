@@ -1,4 +1,12 @@
 {
   "name": "fieldAgent",
-  "app_id": "d737c4b8"
+  "app_id": "d737c4b8",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
