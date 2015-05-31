@@ -415,6 +415,7 @@ angular.module('fieldAgent.controllers', [])
             $scope.modal.remove();
         });
 
+
         $scope.getPhoto = function() {
             Camera.getPicture().then(function(imageURI) {
                 $scope.lastPhoto = imageURI;
@@ -429,6 +430,7 @@ angular.module('fieldAgent.controllers', [])
             });
 
         };
+
 
 
 

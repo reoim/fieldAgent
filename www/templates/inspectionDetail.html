@@ -29,10 +29,10 @@
 
         <a class="item item-list-detail">
             <ion-scroll direction="x">
-                <img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
+                <img ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
             </ion-scroll>
         </a>
-        <button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>
+        <button class="button button-full button-energized" ng-click="getPicture()">Take Picture</button>
         <button class="button button-full button-positive" ng-click="closeModal()">Done</button>
     </ion-content>
 
