@@ -8,7 +8,7 @@
         </div>
         <ion-toggle ng-model="pushNotification.checked"
                     ng-change="pushNotificationChange()">
-            Status: {{areaStatus}}
+            Status: {{areaInspectionDetail.status}}
         </ion-toggle>
 
         <div class="item item-divider">
@@ -17,23 +17,13 @@
 
         </div>
 
-        <a class="item item-list-detail">
-
+        <a class="item item-list-detail item-input">
+            <input type="text" value="{{areaInspectionDetail.note}}" ng-model="areaInspectionDetail.note" >
         </a>
 
 
-        <div class="item item-divider">
-            <i class="ion-images"></i>
-            Area Images
-        </div>
+        <button ng-click="saveDetail()" class="button button-block button-positive">Save</button>
 
-        <a class="item item-list-detail">
-            <ion-scroll direction="x">
-                <img ng-src="{{image.src}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
-            </ion-scroll>
-        </a>
-        <button class="button button-full button-energized" ng-click="getPicture()">Take Picture</button>
-        <button class="button button-full button-positive" ng-click="closeModal()">Done</button>
     </ion-content>
 
 

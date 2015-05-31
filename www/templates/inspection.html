@@ -8,7 +8,7 @@
                 <input type="text" placeholder="Area" ng-model="area.name">
             </label>
         </div>
-        <button ng-click="addArea()" class="button button-block button-positive">Add Area</button>
+        <button ng-click="addArea()" class="button button-block button-dark">Add Area</button>
 
     <!--<div class="list">-->
         <!--<div class="item item-divider">-->
@@ -26,7 +26,7 @@
                 <ion-item class="item-stable"
                           ng-click="toggleArea(area)"
                           ng-class="{active: isAreaShown(area)}">
-                    <i class="icon" ng-class="isAreaShown(area) ? 'ion-minus' : 'ion-plus'"></i>
+                    <i class="icon " ng-class="isAreaShown(area) ? 'ion-minus' : 'ion-plus'"></i>
                     &nbsp;
                     {{area.area_name}}
                 </ion-item>
@@ -34,24 +34,23 @@
 
 
 
-                    <div class="item item-divider">
-                        <i class="icon ion-compose "></i>
-                        Inspection Detail
-
+                    <div class="item item-energized item-button-right">
+                        <font color="black">Inspection Detail</font>
+                        <div class="button button-clear" ng-click="goInspectionDetail()">
+                            <i class="icon ion-compose custom-icon-black"></i>
+                        </div>
                     </div>
 
-                    <a class="item item-list-detail" ng-click="goInspectionDetail()">
+                    <a class="item item-list-detail ">
                         Status: {{areaInspectionDetail.status}} <br>
                         Note: {{areaInspectionDetail.note}}
                     </a>
 
-                    <!--Status: {{areaInspectionDetail.status}}-->
-                    <!--<br>-->
-                    <!--Note: {{areaInspectionDetail.note}}-->
-                    <!--<br><br>-->
-                    <div class="item item-divider">
-                        <i class="ion-images"></i>
-                        Area Images
+                    <div class="item item-energized item-button-right">
+                        <font color="black">Area Images</font>
+                        <div class="button button-clear" ng-click="goAddPhoto()">
+                            <i class="icon ion-camera custom-icon-black"></i>
+                        </div>
                     </div>
                     <a class="item item-list-detail">
                         <ion-scroll direction="x">

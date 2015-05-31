@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.services'])
+angular.module('fieldAgent', ['ionic','ngCordova', 'fieldAgent.controllers', 'fieldAgent.services'])
 
 
 
@@ -94,6 +94,13 @@ angular.module('fieldAgent', ['ionic', 'fieldAgent.controllers', 'fieldAgent.ser
                 url: '/inspectionDetail',
                 templateUrl: "templates/inspectionDetail.html",
                 controller: 'inspectionDetailCtrl'
+            })
+
+            .state('addPhoto', {
+                cache: false,
+                url: '/addPhoto',
+                templateUrl: "templates/addPhoto.html",
+                controller: 'addPhotoCtrl'
             })
 
         $urlRouterProvider.otherwise('/login');

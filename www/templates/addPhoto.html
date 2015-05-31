@@ -1,0 +1,19 @@
+<ion-view view-title="Add Photo" name="addPhoto-view" >
+    <ion-content class="padding">
+
+        <div class="item item-divider">
+            <i class="ion-images"></i>
+            Area Images
+        </div>
+
+        <a class="item item-list-detail">
+
+            <ion-scroll direction="x">
+                <img ng-src="{{lastPhoto}}"  class="image-list-thumb" style="max-width: 30%">
+            </ion-scroll>
+        </a>
+        <button class="button button-full button-energized" ng-click="takePicture()">Take Picture</button>
+        <button class="button button-full button-positive" ng-click="savePhoto()">Save</button>
+
+    </ion-content>
+</ion-view>

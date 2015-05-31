@@ -2,10 +2,12 @@
     <ion-content class="padding">
 
         <div class="card">
-            <div class="item item-divider">
-                {{proDetail.address_1}} {{proDetail.address_2}}
-
-                <button class="button-clear ion-edit"></button>
+            <div class="item item-energized item-button-right">
+                <font color="black"><b>{{proDetail.address_1}} {{proDetail.address_2}}</b></font>
+                <!--<i class="icon ion-compose "></i>-->
+                <div class="button button-clear" ng-click="">
+                    <i class="icon ion-compose custom-icon-black"></i>
+                </div>
             </div>
             <div class="item-text-wrap">
                 <ul>
@@ -20,14 +22,17 @@
         </div>
 
         <div class="list">
-            <div class="item item-divider">
-                Inspection Cases
+            <div class="item item-energized item-button-right">
+                <font color="black"><b>Inspection Cases</b></font>
 
-                    <button class="button-clear ion-plus-round" ng-click="addInspection()"></button>
+                    <div class="button button-clear" ng-click="addInspection()">
+                        <i class="icon ion-plus custom-icon-black"></i>
+                    </div>
 
             </div>
-            <a class="item" href="#" ng-repeat="x in insList" ng-click="goInspection(x)">
+            <a class="item item-button-right" href="#" ng-repeat="x in insList" ng-click="goInspection(x)">
                 {{x.date}}
+
             </a>
         </div>
 

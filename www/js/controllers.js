@@ -277,6 +277,11 @@ angular.module('fieldAgent.controllers', [])
 
         }
 
+        $scope.goAddPhoto = function() {
+            $state.go('addPhoto');
+
+        }
+
         $scope.area={};
         $scope.url = 'https://fieldagent.js-dev.co/addArea.php';
         $scope.addArea = function() {
@@ -337,8 +342,9 @@ angular.module('fieldAgent.controllers', [])
                 .then(function(areaDetail) {
                     vm.areaDetail = areaDetail;
                     $scope.areaInspectionDetail = areaDetail;
-                    console.log(areaIdService.areaid);
-                    console.log($scope.areaInspectionDetail);
+                    //console.log(areaIdService.areaid);
+                    //console.log(caseIdService.caseid);
+                    //console.log($scope.areaInspectionDetail);
                 },
                 function(data) {
                     console.log('getAreaDetail method failed.')
@@ -355,14 +361,43 @@ angular.module('fieldAgent.controllers', [])
         $scope.toggleArea = function(area) {
 
             if (areaIdService.areaid=area.areaid){
-                vm.getAreaDetail();
+
+                $scope.url = 'https://fieldagent.js-dev.co/addInspectedArea.php';
+                $http.post($scope.url, {"caseid" : caseIdService.caseid,
+                    "areaid" : areaIdService.areaid,
+                    "imageurl": "",
+                    "note" : "",
+                    "status" : ""})
+                    .success(function(data) {
+                        $scope.data = data;
+                        //console.log(data.msg);
+                        //console.log(data.inspected_area_details);
+
+                        if(data.msg == "Inspected Area created"){
+
+                            vm.getAreaDetail();
+
+                        } else {
+
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Update Failed!',
+                                template: data.msg
+                            })
+
+                        }
+
+
+                    })
+
+                    .error(function() {
+                        console.log("connection fail");
+
+                    })
+
+                //vm.getAreaDetail();
             } else {
                 console.log("Faield to assign areaid for getAreaDetail()")
             }
-
-
-
-
 
             if ($scope.isAreaShown(area)) {
                 $scope.shownArea = null;
@@ -378,58 +413,67 @@ angular.module('fieldAgent.controllers', [])
 
     })
 
-.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, Camera, areaIdService) {
+.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, areaIdService, areaDetailService) {
 
 
-        $scope.areaStatus="Good";
+        var vm = this;
+        vm.areaDetail = [];
+        vm.getAreaDetail = function() {
+            areaDetailService.getAreaDetail()
+                .then(function(areaDetail) {
+                    vm.areaDetail = areaDetail;
+                    $scope.areaInspectionDetail = areaDetail;
+                    //$scope.areaStatus = areaDetail.status;
+                },
+                function(data) {
+                    console.log('getAreaDetail method failed.')
+                });
+        };
+        vm.getAreaDetail();
+
+
+        //$scope.areaStatus="Good";
         $scope.pushNotificationChange = function() {
             console.log('Push Notification Change', $scope.pushNotification.checked);
             if($scope.pushNotification.checked){
-                $scope.areaStatus="Good";
+                $scope.areaInspectionDetail.status="Good";
             }else{
-                $scope.areaStatus="Bad";
+                $scope.areaInspectionDetail.status="Bad";
             }
         };
 
-        $scope.pushNotification = { checked: true };
+        $scope.pushNotification = { checked: false };
+
+        $scope.url = 'https://fieldagent.js-dev.co/updateInspectedArea.php';
 
 
-        $ionicModal.fromTemplateUrl('contact-modal.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal) {
-            $scope.modal = modal
-        });
+        $scope.saveDetail = function() {
 
-        $scope.openModal = function() {
-            $scope.modal.show()
-        };
-
-        $scope.closeModal = function() {
-            $scope.modal.hide();
+            $http.post($scope.url, {"caseid" : $scope.areaInspectionDetail.caseid,
+                                    "areaid" : $scope.areaInspectionDetail.areaid,
+                                    "note" : $scope.areaInspectionDetail.note,
+                                    "status" : $scope.areaInspectionDetail.status})
+                .success(function(data) {
 
 
-        };
-
-        $scope.$on('$destroy', function() {
-            $scope.modal.remove();
-        });
+                    $scope.data = data;
+                    console.log(data.msg);
 
 
-        $scope.getPhoto = function() {
-            Camera.getPicture().then(function(imageURI) {
-                $scope.lastPhoto = imageURI;
+                    if(data.msg == "Update Inspected Area successful"){
 
-            }, function(err) {
-                console.err(err);
-            }, {
-                quality: 75,
-                targetWidth: 320,
-                targetHeight: 320,
-                saveToPhotoAlbum: false
-            });
+                        $state.go('inspection');
 
-        };
+                    }
+                })
+
+                .error(function() {
+                    console.log("connection fail");
+
+                })
+        }
+
+
 
 
 
@@ -437,6 +481,54 @@ angular.module('fieldAgent.controllers', [])
 
 
     })
+
+
+.controller("addPhotoCtrl", function($scope, $http, $state, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, caseIdService, propertyIdService, areaService, $ionicModal, areaIdService, areaDetailService) {
+
+        $scope.takePicture = function() {
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageURI) {
+                $scope.lastPhoto = imageURI;
+            }, function(err) {
+                // An error occured. Show a message to the user
+                console.log(err);
+            });
+        }
+
+        $scope.savePhoto = function(imageURI) {
+            var ftoptions = new FileUploadOptions();
+            ftoptions.fileKey = "file";
+            ftoptions.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+            ftoptions.mimeType = "image/jpeg";
+            ftoptions.httpMethod = 'POST';
+            var params = new Object();
+            params.caseid = caseIdService.caseid;
+            params.areaid = areaIdService.areaid;
+
+            ftoptions.params = params;
+            console.log(params);
+
+            $cordovaFileTransfer.upload("https://fieldagent.js-dev.co/uploadImage.php", imageURI, ftoptions)
+                .then(function (result) {
+                    console.log('success: ' + angular.toJson(result));
+                    $state.go('inspection')
+                },
+                function (err) {
+                    // Error
+                    console.log('error: ' + err);
+                },
+                function (progress) {
+                    // constant progress updates
+                });
+
+        }
+
+})
+
 
 
 //var MAX_WIDTH = 50;
