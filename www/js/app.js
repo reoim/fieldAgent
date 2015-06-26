@@ -10,18 +10,19 @@ angular.module('fieldAgent', ['ionic','ngCordova', 'fieldAgent.controllers', 'fi
 
 
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
+    .run(function($ionicPlatform) {
+        $ionicPlatform.ready(function() {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if(window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if(window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+
+        });
+    })
 
 
     .config(function($compileProvider){
@@ -102,6 +103,8 @@ angular.module('fieldAgent', ['ionic','ngCordova', 'fieldAgent.controllers', 'fi
                 templateUrl: "templates/addPhoto.html",
                 controller: 'addPhotoCtrl'
             })
+
+
 
         $urlRouterProvider.otherwise('/login');
 

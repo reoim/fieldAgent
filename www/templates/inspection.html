@@ -1,3 +1,5 @@
+
+
 <ion-view view-title="Inspection Case" name="inspection-view">
     <ion-nav-buttons side="secondary">
 
@@ -10,15 +12,15 @@
         </div>
         <button ng-click="addArea()" class="button button-block button-dark">Add Area</button>
 
-    <!--<div class="list">-->
+        <!--<div class="list">-->
         <!--<div class="item item-divider">-->
-            <!--Click area to inspect-->
+        <!--Click area to inspect-->
         <!--</div>-->
         <!--<a class="item" ng-repeat="area in areas" ng-click="goInspectionDetail()">-->
         <!--{{area.area_name}}-->
         <!--</a>-->
 
-    <!--</div>-->
+        <!--</div>-->
 
 
         <ion-list>
@@ -44,18 +46,17 @@
                     <a class="item item-list-detail ">
                         Status: {{areaInspectionDetail.status}} <br>
                         Note: {{areaInspectionDetail.note}}
+
                     </a>
 
                     <div class="item item-energized item-button-right">
                         <font color="black">Area Images</font>
-                        <div class="button button-clear" ng-click="goAddPhoto()">
+                        <div class="button button-clear" ng-click="goPhoto()">
                             <i class="icon ion-camera custom-icon-black"></i>
                         </div>
                     </div>
                     <a class="item item-list-detail">
-                        <ion-scroll direction="x">
-                            <img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
-                        </ion-scroll>
+                        <img ng-src="{{areaInspectionDetail.imageurl}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">
                     </a>
                 </ion-item>
 
@@ -66,20 +67,20 @@
 
 
         <!--<ion-list>-->
-            <!--<div ng-repeat="group in groups">-->
-                <!--<ion-item class="item-stable"-->
-                          <!--ng-click="toggleGroup(group)"-->
-                          <!--ng-class="{active: isGroupShown(group)}">-->
-                    <!--<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>-->
-                    <!--&nbsp;-->
-                    <!--Group {{group.name}}-->
-                <!--</ion-item>-->
-                <!--<ion-item class="item-accordion"-->
-                          <!--ng-repeat="item in group.items"-->
-                          <!--ng-show="isGroupShown(group)">-->
-                    <!--{{item}}-->
-                <!--</ion-item>-->
-            <!--</div>-->
+        <!--<div ng-repeat="group in groups">-->
+        <!--<ion-item class="item-stable"-->
+        <!--ng-click="toggleGroup(group)"-->
+        <!--ng-class="{active: isGroupShown(group)}">-->
+        <!--<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>-->
+        <!--&nbsp;-->
+        <!--Group {{group.name}}-->
+        <!--</ion-item>-->
+        <!--<ion-item class="item-accordion"-->
+        <!--ng-repeat="item in group.items"-->
+        <!--ng-show="isGroupShown(group)">-->
+        <!--{{item}}-->
+        <!--</ion-item>-->
+        <!--</div>-->
         <!--</ion-list>-->
 
     </ion-content>
@@ -88,34 +89,34 @@
 
 <!--<script id="contact-modal.html" type="text/ng-template">-->
 
-    <!--<div class="modal">-->
-        <!--<ion-header-bar>-->
-            <!--<h1 class="title">Inspect Area</h1>-->
-        <!--</ion-header-bar>-->
-        <!--<ion-content>-->
-            <!--<div class="list">-->
-                <!--<item class="item item-icon-left"><i class="icon ion-compose"></i>-->
-                <!--<label class="item item-input">-->
-                    <!--<span class="input-label"></span>-->
-                    <!--<textarea ng-model="inspectedArea.note" name="posttext" rows="4"></textarea>-->
+<!--<div class="modal">-->
+<!--<ion-header-bar>-->
+<!--<h1 class="title">Inspect Area</h1>-->
+<!--</ion-header-bar>-->
+<!--<ion-content>-->
+<!--<div class="list">-->
+<!--<item class="item item-icon-left"><i class="icon ion-compose"></i>-->
+<!--<label class="item item-input">-->
+<!--<span class="input-label"></span>-->
+<!--<textarea ng-model="inspectedArea.note" name="posttext" rows="4"></textarea>-->
 
-                <!--</label>-->
-                <!--</item>-->
-            <!--</div>-->
+<!--</label>-->
+<!--</item>-->
+<!--</div>-->
 
-            <!--<div class="item item-divider">-->
-                <!--<i class="ion-images"></i>-->
-                <!--Area Images-->
-            <!--</div>-->
+<!--<div class="item item-divider">-->
+<!--<i class="ion-images"></i>-->
+<!--Area Images-->
+<!--</div>-->
 
-            <!--<a class="item item-list-detail">-->
-                <!--<ion-scroll direction="x">-->
-                    <!--<img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">-->
-                <!--</ion-scroll>-->
-            <!--</a>-->
-            <!--<button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>-->
-            <!--<button class="button button-full button-positive" ng-click="closeModal()">Done</button>-->
-        <!--</ion-content>-->
-    <!--</div>-->
+<!--<a class="item item-list-detail">-->
+<!--<ion-scroll direction="x">-->
+<!--<img ng-src="{{lastPhoto}}" ng-click="showImages($index)" class="image-list-thumb" style="max-width: 30%">-->
+<!--</ion-scroll>-->
+<!--</a>-->
+<!--<button class="button button-full button-energized" ng-click="getPhoto()">Take Picture</button>-->
+<!--<button class="button button-full button-positive" ng-click="closeModal()">Done</button>-->
+<!--</ion-content>-->
+<!--</div>-->
 
 <!--</script>-->

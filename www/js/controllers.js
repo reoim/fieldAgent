@@ -4,7 +4,7 @@
 angular.module('fieldAgent.controllers', [])
 
 
-.controller("LoginCtrl", function($scope, $http, $state, $ionicPopup, userIdService, propertyListService) {
+    .controller("LoginCtrl", function($scope, $http, $state, $ionicPopup, userIdService, propertyListService) {
 
 
         $scope.user = {};
@@ -14,7 +14,7 @@ angular.module('fieldAgent.controllers', [])
 
         $scope.login = function() {
 
-             $http.post($scope.url, {"username" : $scope.user.username, "password" : $scope.user.password})
+            $http.post($scope.url, {"username" : $scope.user.username, "password" : $scope.user.password})
                 .success(function(data, status) {
                     $scope.status = status;
                     $scope.data = data;
@@ -22,10 +22,10 @@ angular.module('fieldAgent.controllers', [])
                     if(data.msg == "Success"){
                         userIdService.userid = data.userid;
 
-                            //console.log(userIdService.userid);
+                        //console.log(userIdService.userid);
                         $state.go('home');
 
-                     } else {
+                    } else {
 
                         var alertPopup = $ionicPopup.alert({
                             title: 'Login failed!',
@@ -57,7 +57,7 @@ angular.module('fieldAgent.controllers', [])
 
     })
 
-.controller("SignupCtrl", function($scope, $http, $state, $ionicPopup) {
+    .controller("SignupCtrl", function($scope, $http, $state, $ionicPopup) {
 
         $scope.userSignup = {};
         $scope.url = 'https://fieldagent.js-dev.co/register.php';
@@ -100,7 +100,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("HomeCtrl", function($scope, $http, $state, propertyListService, propertyIdService) {
+    .controller("HomeCtrl", function($scope, $http, $state, propertyListService, propertyIdService) {
 
         var vm = this;
         vm.property = [];
@@ -111,9 +111,9 @@ angular.module('fieldAgent.controllers', [])
                     $scope.pro = property;
 
                 },
-            function(data) {
-                console.log('getProperty method is failed.')
-            });
+                function(data) {
+                    console.log('getProperty method is failed.')
+                });
         };
 
         vm.getProperty();
@@ -127,13 +127,13 @@ angular.module('fieldAgent.controllers', [])
         $scope.goDetail = function(x){
             propertyIdService.propertyid = x.propertyid;
             $state.go('propertydetail');
-            console.log(propertyIdService.propertyid);
+            console.log('Property id' + propertyIdService.propertyid);
 
         }
 
     })
 
-.controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, inspectionService, propertyIdService, caseIdService ,$filter) {
+    .controller('ProDetailCtrl', function($scope, $state, propertyDetailService, $http, $ionicPopup, inspectionService, propertyIdService, caseIdService ,$filter) {
 
         var vm = this;
         vm.propertyDetail = [];
@@ -212,9 +212,9 @@ angular.module('fieldAgent.controllers', [])
             console.log(caseIdService.caseid);
         }
 
-})
+    })
 
-.controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
+    .controller("AddHouseCtrl", function($scope, $http, $state, $ionicPopup, userIdService) {
 
 
         $scope.houseDetail = {};
@@ -268,7 +268,7 @@ angular.module('fieldAgent.controllers', [])
     })
 
 
-.controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService, areaDetailService) {
+    .controller("inspectionCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService, areaDetailService) {
 
 
         $scope.goInspectionDetail = function(){
@@ -277,10 +277,10 @@ angular.module('fieldAgent.controllers', [])
 
         }
 
-        $scope.goAddPhoto = function() {
-            $state.go('addPhoto');
-
-        }
+        //$scope.goAddPhoto = function() {
+        //    $state.go('addPhoto');
+        //
+        //}
 
         $scope.area={};
         $scope.url = 'https://fieldagent.js-dev.co/addArea.php';
@@ -329,9 +329,9 @@ angular.module('fieldAgent.controllers', [])
                     $scope.areas = areaList;
                     //console.log($scope.areas[0]);
                 },
-            function(data) {
-               console.log('getArea method is failed')
-            });
+                function(data) {
+                    console.log('getArea method is failed')
+                });
         };
         vm.getArea();
 
@@ -410,10 +410,14 @@ angular.module('fieldAgent.controllers', [])
         };
 
 
+        $scope.goPhoto = function(){
 
+            $state.go('addPhoto');
+
+        }
     })
 
-.controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, areaIdService, areaDetailService) {
+    .controller("inspectionDetailCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, $ionicModal, areaIdService, areaDetailService) {
 
 
         var vm = this;
@@ -423,6 +427,7 @@ angular.module('fieldAgent.controllers', [])
                 .then(function(areaDetail) {
                     vm.areaDetail = areaDetail;
                     $scope.areaInspectionDetail = areaDetail;
+                    console.log($scope.areaInspectionDetail.imageurl);
                     //$scope.areaStatus = areaDetail.status;
                 },
                 function(data) {
@@ -450,9 +455,9 @@ angular.module('fieldAgent.controllers', [])
         $scope.saveDetail = function() {
 
             $http.post($scope.url, {"caseid" : $scope.areaInspectionDetail.caseid,
-                                    "areaid" : $scope.areaInspectionDetail.areaid,
-                                    "note" : $scope.areaInspectionDetail.note,
-                                    "status" : $scope.areaInspectionDetail.status})
+                "areaid" : $scope.areaInspectionDetail.areaid,
+                "note" : $scope.areaInspectionDetail.note,
+                "status" : $scope.areaInspectionDetail.status})
                 .success(function(data) {
 
 
@@ -472,47 +477,83 @@ angular.module('fieldAgent.controllers', [])
 
                 })
         }
-
-
-
-
-
-
-
-
     })
 
 
-.controller("addPhotoCtrl", function($scope, $http, $state, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, caseIdService, propertyIdService, areaService, $ionicModal, areaIdService, areaDetailService) {
+    .controller("addPhotoCtrl", function($scope, $http, $state, $ionicPopup, caseIdService, propertyIdService, areaService, areaIdService, areaDetailService, $cordovaCamera, $cordovaFileTransfer ) {
 
-        $scope.takePicture = function() {
+
+
+        $scope.takePhoto = function() {
+
             var options = {
+                quality: 50,
                 destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: 0,
+                targetWidth: 300,
+                targetHeight: 300,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
             };
 
+
+            //var options = {
+            //    quality: 50,
+            //    destinationType: Camera.DestinationType.FILE_URI,
+            //    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            //    allowEdit: true,
+            //    encodingType: Camera.EncodingType.JPEG,
+            //    popoverOptions: CameraPopoverOptions,
+            //    saveToPhotoAlbum: false
+            //};
+
+
+
             $cordovaCamera.getPicture(options).then(function(imageURI) {
-                $scope.lastPhoto = imageURI;
+                $scope.photoImg = imageURI;
             }, function(err) {
                 // An error occured. Show a message to the user
                 console.log(err);
             });
         }
+        $scope.savePhoto = function() {
 
-        $scope.savePhoto = function(imageURI) {
-            var ftoptions = new FileUploadOptions();
-            ftoptions.fileKey = "file";
-            ftoptions.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-            ftoptions.mimeType = "image/jpeg";
-            ftoptions.httpMethod = 'POST';
-            var params = new Object();
-            params.caseid = caseIdService.caseid;
-            params.areaid = areaIdService.areaid;
+            //var canvas = document.getElementById("areaImg");
+            //
+            //var MAX_WIDTH = 300;
+            //var MAX_HEIGHT = 300;
+            //var width = img.width;
+            //var height = img.height;
+            //
+            //if (width > height) {
+            //    if (width > MAX_WIDTH) {
+            //        height *= MAX_WIDTH / width;
+            //        width = MAX_WIDTH;
+            //    }
+            //} else {
+            //    if (height > MAX_HEIGHT) {
+            //        width *= MAX_HEIGHT / height;
+            //        height = MAX_HEIGHT;
+            //    }
+            //}
+            //canvas.width = width;
+            //canvas.height = height;
+            //var ctx = canvas.getContext("2d");
+            //ctx.drawImage(img, 0, 0, width, height);
 
-            ftoptions.params = params;
-            console.log(params);
 
-            $cordovaFileTransfer.upload("https://fieldagent.js-dev.co/uploadImage.php", imageURI, ftoptions)
+
+            var filePath = $scope.photoImg;
+            var options = {
+                fileKey: "fileToUpload",
+                fileName: filePath.substr(filePath.lastIndexOf('/') + 1),
+                chunkedMode: false,
+                mimeType: "image/jpg"
+            };
+
+            $cordovaFileTransfer.upload("https://fieldagent.js-dev.co/uploadImage.php?caseid="+caseIdService.caseid+"&areaid="+areaIdService.areaid,filePath, options)
                 .then(function (result) {
                     console.log('success: ' + angular.toJson(result));
                     $state.go('inspection')
@@ -524,31 +565,9 @@ angular.module('fieldAgent.controllers', [])
                 function (progress) {
                     // constant progress updates
                 });
-
         }
 
-})
+    })
 
 
 
-//var MAX_WIDTH = 50;
-//var MAX_HEIGHT = 50;
-//var width = img.width;
-//var height = img.height;
-//
-//if (width > height) {
-//    if (width > MAX_WIDTH) {
-//        height *= MAX_WIDTH / width;
-//        width = MAX_WIDTH;
-//    }
-//} else {
-//    if (height > MAX_HEIGHT) {
-//        width *= MAX_HEIGHT / height;
-//        height = MAX_HEIGHT;
-//    }
-//}
-//canvas.width = width;
-//canvas.height = height;
-//var ctx = canvas.getContext("2d");
-//ctx.drawImage(imageURI, 0, 0, width, height);
-//$scope.resizedPhoto = ctx.toDataURL();

@@ -1,3 +1,4 @@
+
 <ion-view view-title="Add Photo" name="addPhoto-view" >
     <ion-content class="padding">
 
@@ -7,13 +8,13 @@
         </div>
 
         <a class="item item-list-detail">
+            <img ng-show="photoImg !== undefined" ng-src="{{photoImg}}" id="areaImg">
+            <img ng-show="photoImg === undefined" ng-src="http://placehold.it/300x300">
 
-            <ion-scroll direction="x">
-                <img ng-src="{{lastPhoto}}"  class="image-list-thumb" style="max-width: 30%">
-            </ion-scroll>
         </a>
-        <button class="button button-full button-energized" ng-click="takePicture()">Take Picture</button>
+        <button class="button button-full button-energized" ng-click="takePhoto()">Take Picture</button>
         <button class="button button-full button-positive" ng-click="savePhoto()">Save</button>
+
 
     </ion-content>
 </ion-view>

@@ -3,7 +3,7 @@
  */
 angular.module('fieldAgent.services', [])
 
-.factory('propertyDetailService', function($http, propertyIdService, $q) {
+    .factory('propertyDetailService', function($http, propertyIdService, $q) {
 
         var service = {
             propertyDetail: [],
@@ -28,7 +28,7 @@ angular.module('fieldAgent.services', [])
     })
 
 
-.factory('propertyListService',function($http, userIdService, $q) {
+    .factory('propertyListService',function($http, userIdService, $q) {
 
         // interface
         var  service = {
@@ -55,7 +55,7 @@ angular.module('fieldAgent.services', [])
         }
     })
 
-.factory('inspectionService', function($http, $q, propertyIdService) {
+    .factory('inspectionService', function($http, $q, propertyIdService) {
         //interface
         var service = {
             inspectionList: [],
@@ -77,7 +77,7 @@ angular.module('fieldAgent.services', [])
         }
     })
 
-.factory('areaService', function($http, $q, propertyIdService) {
+    .factory('areaService', function($http, $q, propertyIdService) {
 
         var service = {
             areaList: [],
@@ -100,59 +100,59 @@ angular.module('fieldAgent.services', [])
         }
     })
 
-.factory('areaDetailService', function($http, $q, caseIdService, areaIdService) {
+    .factory('areaDetailService', function($http, $q, caseIdService, areaIdService) {
 
-    var service = {
-        areaDetail: [],
-        getAreaDetail: getAreaDetail
-    };
-    return service;
+        var service = {
+            areaDetail: [],
+            getAreaDetail: getAreaDetail
+        };
+        return service;
 
-    function getAreaDetail(){
-        var def = $q.defer();
-        $http.get("https://fieldagent.js-dev.co/getInspectedArea.php", {params: {"caseid": caseIdService.caseid, "areaid": areaIdService.areaid}})
-            .success(function(data) {
-                service.areaDetail = data;
-                def.resolve(data);
-            })
-            .error(function() {
-                def.reject("Failed to get area Detail");
-            });
-        return def.promise;
+        function getAreaDetail(){
+            var def = $q.defer();
+            $http.get("https://fieldagent.js-dev.co/getInspectedArea.php", {params: {"caseid": caseIdService.caseid, "areaid": areaIdService.areaid}})
+                .success(function(data) {
+                    service.areaDetail = data;
+                    def.resolve(data);
+                })
+                .error(function() {
+                    def.reject("Failed to get area Detail");
+                });
+            return def.promise;
 
-    }
-})
-
-
-
-
-.factory('Camera', ['$q', function($q) {
-
-    return {
-        getPicture: function(options) {
-            var q = $q.defer();
-
-            navigator.camera.getPicture(function(result) {
-                // Do any magic you need
-                q.resolve(result);
-            }, function(err) {
-                q.reject(err);
-            }, options);
-
-            return q.promise;
         }
-    }
-}])
+    })
 
 
 
-.factory('propertyIdService', function() {
+
+    .factory('Camera', ['$q', function($q) {
+
+        return {
+            getPicture: function(options) {
+                var q = $q.defer();
+
+                navigator.camera.getPicture(function(result) {
+                    // Do any magic you need
+                    q.resolve(result);
+                }, function(err) {
+                    q.reject(err);
+                }, options);
+
+                return q.promise;
+            }
+        }
+    }])
+
+
+
+    .factory('propertyIdService', function() {
         return{
             propertyid : "defualt"
         };
     })
 
-.factory('userIdService', function() {
+    .factory('userIdService', function() {
 
         return{
             userid : 'anonymous'
@@ -160,17 +160,17 @@ angular.module('fieldAgent.services', [])
 
     })
 
-.factory('caseIdService', function() {
+    .factory('caseIdService', function() {
         return{
             caseid : "defualt"
         };
     })
 
-.factory('areaIdService', function() {
-    return{
-        areaid : "default"
-    };
-})
+    .factory('areaIdService', function() {
+        return{
+            areaid : "default"
+        };
+    })
 
 
 
